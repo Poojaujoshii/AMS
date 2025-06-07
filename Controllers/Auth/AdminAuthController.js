@@ -1,28 +1,30 @@
 import Admin from "../../Models/Admin.js"
-import jwt from "jsonwebtoken"
-export const adminLogin = async(req,res)=>{
+import { generateToken } from "../../Utilities/Jwt.js"
+
+export const adminLogin = async(req,res,next)=>{
     try{
        const {email,password} =req.body 
        if(email && password){
             const isAdmin = await Admin.findOne({email})
             if(isAdmin){
                 if(password === isAdmin.password){
-                    const token  = jwt.sign({id:isAdmin._id},"SecretKey")
-                     return res.status(200).send({token})
+                    const token  = generateToken({id:isAdmin._id})
+                    res.cookie("token",token,{maxAge:1000*60*60*24*7,httponly:true})
+                     return res.status(200).send({message:"Login Successful"})
                 }
                 else{
-                    return res.status(401).send({error:"Incorrect Password"})
+                   throw new Error("Incorrect Password")
                 }
             }
             else{
-                return res.status(400).send({error:"Admin Not found"})
+                throw new Error("Admin Not Found")
             }
        }
        else{
-        return res.status(400).send({error:"Provide All Fields"})
+        throw new Error("User Details Not Found")
        }
     }
     catch(error){
-         return res.status(500).send({error:"Something went wrong", msg:error.message})
+         next(error)
     }
 }

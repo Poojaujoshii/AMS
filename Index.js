@@ -9,6 +9,7 @@ import employeeRouter from "./Routes/EmployeeRoute.js";
 import adminAuthRouter from "./Routes/Auth/AdminAuthRoute.js"
 import adminRouter from "./Routes/adminRoute.js";
 import employeeAuthRouter from "./Routes/Auth/EmployeeAuthRoute.js";
+import errorHandler from "./Middlewares/ErrorMiddleware.js";
 config()
 
 
@@ -32,6 +33,9 @@ app.use("/api/auth/admin",adminAuthRouter)
 
 app.get("/",(req,res)=> res.send({message:"server is running"}))
 
+//error bounding
+app.use(errorHandler)
+
 //db connection
 dbConnect()
 
@@ -39,6 +43,6 @@ dbConnect()
 const port = process.env.SERVER_PORT || 8000;
 
 app.listen(8000,()=>{
-    console.log("Server is running in port" + port);
+    console.log("Server is running in port " + port);
     
 })
