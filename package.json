@@ -24,5 +24,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Poojaujoshii/Asset-management-System.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Poojaujoshii/Asset-management-System/issues"
+  },
+  "homepage": "https://github.com/Poojaujoshii/Asset-management-System#readme",
   "description": ""
 }
