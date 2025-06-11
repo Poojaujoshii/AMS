@@ -1,4 +1,4 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 const assetSchema = new mongoose.Schema({
     name: {type : String, required : true},
@@ -7,10 +7,10 @@ const assetSchema = new mongoose.Schema({
     model: {type : String},
     imageUrl: {type : String},
     assetTag: {type : String, unique : true, required : true},
-    status: {type : string, enum: ["Available","Assigned","Damaged"]},
+    status: {type : String, enum: ["Available","Assigned","Damaged"]},
     purchaseDate: {type : Date},
     warrantyExpiryDate: {type : Date},
 },{timestamps:true})
 
-const Asset = Mongoose.model("Assets",assetSchema)
+const Asset = mongoose.model("Assets",assetSchema)
 export default Asset;
