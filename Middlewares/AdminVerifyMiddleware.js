@@ -16,6 +16,7 @@ export const adminVerify = async(req,res,next)=>{
     
     }
     catch(error){
-        next(error);
+                    throw new Error(error)
+
     }
 }

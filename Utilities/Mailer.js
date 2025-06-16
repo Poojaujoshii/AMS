@@ -1,15 +1,16 @@
+
 import nodemailer from "nodemailer"
 import { config } from "dotenv"
 config()
 
-const transporter = nodemailer.createTransport({
+let transporter = nodemailer.createTransport({
     service: "gmail",
     auth :{
         user:process.env.MAIL_USER,
         password:process.env.MAIL_PASS
     }
 })
-export const sendEmail = async({to,subject,text})=>{
+export let sendEmail = async({to,subject,text})=>{
     try{
         await transporter.sendMail({
             from:process.env.MAIL_USER,
@@ -21,3 +22,5 @@ export const sendEmail = async({to,subject,text})=>{
     }
 
 }
+
+
