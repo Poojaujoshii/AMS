@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 dotenv.config();
-const db = process.env.MONGO_URL||"mongodb://127.0.01:27017/AssetManagementSystem";
+const db = process.env.MONGO_URL||"mongodb://127.0.0.1:27017/AssetManagementSystem";
 
 const dbConnect = async ()=>{
     try{
