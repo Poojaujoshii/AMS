@@ -8,7 +8,7 @@ export const EmployeeLogin = async(req,res,next)=>{
             const isEmployee = await Employee.findOne({$or:[{email},{employeeId}],})
             if(isEmployee){
                 if(password === isEmployee.password){
-                    const token  = generateToken({id:isEmployee._id})
+                    const token  = generateToken({id:isEmployee._id, role:"Employee"})
                     res.cookie("token",token,{maxAge:1000*60*60*24*7,httpOnly:true})
                      return res.status(200).send({message:"Login Successful"})
                 }
