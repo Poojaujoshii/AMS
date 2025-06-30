@@ -1,12 +1,18 @@
 import express from "express"
-import { adminLogin, getAuthStatus, Logout} from "../Controllers/Auth/AdminAuthController.js"
-import { EmployeeLogin} from "../Controllers/Auth/EmployeeAuthController.js"
+import { adminLogin, employeeLogin, getAuthStatus, logout } from "../Controllers/AuthController.js"
 
-const authRouter  = express.Router();
-authRouter.post("/admin/login",adminLogin)
-authRouter.post("/employee/login",EmployeeLogin)
-//auth status verification
-authRouter.get("/me",getAuthStatus)
-authRouter.get("/logout",Logout)
+const authRouter = express.Router()
+
+//admin login
+authRouter.post("/admin/login", adminLogin)
+
+//employee login
+authRouter.post("/employee/login", employeeLogin)
+
+//auth status verification (after authentication)
+authRouter.get("/me", getAuthStatus)
+
+//remove the auth token from cookies
+authRouter.get("/logout", logout)
 
 export default authRouter

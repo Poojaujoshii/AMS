@@ -1,19 +1,20 @@
 import { Route, Routes } from "react-router-dom"
-import Login from "./Components/Login"
-import AdminDashboard from "./Components/AdminDashboard"
-import EmployeeDashboard from "./Components/EmployeeDashboard"
+import Login from "./Pages/Login"
+import Employee from "./Pages/Employee"
+import Admin from "./Pages/Admin"
+
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Login />} />
-        {/* Add your protected routes below */}
-         <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/employee/dashboard" element={<EmployeeDashboard />} /> 
+        
+        <Route path="/login" element={<Login />} />
+        <Route path="/employee" element={<Employee/>}/>
+        <Route path="/admin" element={<Admin/>}/>
+
       </Routes>
     </>
   )
 }
-
 export default App

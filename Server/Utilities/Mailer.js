@@ -7,7 +7,7 @@ let transporter = nodemailer.createTransport({
     service: "gmail",
     auth :{
         user:process.env.MAIL_USER,
-        password:process.env.MAIL_PASS
+        pass:process.env.MAIL_PASS
     }
 })
 export let sendEmail = async({to,subject,text})=>{

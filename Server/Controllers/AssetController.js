@@ -22,7 +22,7 @@ export const getAllAssets = async(req,res,next)=>{
 export const deleteAsset = async (req,res,next)=>{
     try{
         const {id} = req.params
-        await Asset.findByIdAndDelete({_id:id})
+        await Asset.deleteOne({_id:id})
         res.status(200).send({message : "Asset Data Removed"})
     }
     catch(error){

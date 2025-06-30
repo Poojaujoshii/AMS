@@ -1,6 +1,7 @@
 import Employee from "../Models/Employee.js";
 import { verifyToken } from "../Utilities/Jwt.js";
 import { sendEmail } from "../Utilities/Mailer.js";
+import Asset from "../Models/Asset.js";
 
 export const addEmployee = async (req,res,next)=>{
     try{
@@ -55,3 +56,25 @@ export const getEmployee = async(req,res,next)=>{
         next(error)
     }
 }
+
+
+export const getAssignedAssets = async (req, res, next) => {
+  try {
+    const { token } = req.cookies;
+    if (!token) {
+      throw new Error("Token not found");
+    }
+
+    const { id } = verifyToken(token);
+    if (!id) {
+      throw new Error("Invalid token");
+    }
+
+    // Find all assets assigned to this employee
+    const assignedAssets = await Asset.find({ assignedTo: id });
+
+    res.status(200).json({ assets: assignedAssets });
+  } catch (error) {
+    next(error);
+  }
+};
